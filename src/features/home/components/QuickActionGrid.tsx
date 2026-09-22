@@ -56,6 +56,8 @@ const styles = StyleSheet.create({
   item: {
     flexBasis: '30%',
     flexGrow: 1,
+    flexShrink: 1,
+    minWidth: 0,
   },
   card: {
     alignItems: 'center',
