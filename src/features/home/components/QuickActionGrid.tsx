@@ -6,7 +6,8 @@ import {
   UserRound,
   WalletCards,
 } from 'lucide-react-native';
-import { StyleSheet, Text, View } from 'react-native';
+import { Link } from 'expo-router';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { AppCard, IconBadge } from '@/shared/components';
 import { colors, spacing, typography } from '@/shared/theme';
@@ -30,12 +31,16 @@ export function QuickActionGrid() {
         const Icon = actionIcons[action.icon];
 
         return (
-          <AppCard accessibilityRole="button" key={action.id} style={styles.item}>
-            <IconBadge backgroundColor={action.backgroundColor} size={44}>
-              <Icon color={action.color} size={26} strokeWidth={2.2} />
-            </IconBadge>
-            <Text style={styles.label}>{action.title}</Text>
-          </AppCard>
+          <Link asChild href={action.href} key={action.id}>
+            <Pressable style={({ pressed }) => [styles.item, pressed && styles.pressed]}>
+              <AppCard style={styles.card}>
+                <IconBadge backgroundColor={action.backgroundColor} size={44}>
+                  <Icon color={action.color} size={26} strokeWidth={2.2} />
+                </IconBadge>
+                <Text style={styles.label}>{action.title}</Text>
+              </AppCard>
+            </Pressable>
+          </Link>
         );
       })}
     </View>
@@ -49,13 +54,19 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
   item: {
-    alignItems: 'center',
     flexBasis: '30%',
     flexGrow: 1,
+  },
+  card: {
+    alignItems: 'center',
     justifyContent: 'center',
     minHeight: 112,
     paddingHorizontal: spacing.sm,
     paddingVertical: spacing.md,
+  },
+  pressed: {
+    opacity: 0.72,
+    transform: [{ scale: 0.98 }],
   },
   label: {
     color: colors.text,

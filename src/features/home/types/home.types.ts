@@ -12,6 +12,7 @@ export type QuickAction = {
   icon: QuickActionIcon;
   color: string;
   backgroundColor: string;
+  href: '/attendance' | '/requests' | '/payroll' | '/more';
 };
 
 export type OverviewIcon = 'work' | 'leave' | 'remaining';
@@ -23,13 +24,4 @@ export type OverviewStat = {
   icon: OverviewIcon;
   color: string;
   backgroundColor: string;
-};
-
-export type BottomNavIcon = 'home' | 'time' | 'forms' | 'salary' | 'more';
-
-export type BottomNavItem = {
-  id: string;
-  label: string;
-  icon: BottomNavIcon;
-  active?: boolean;
 };

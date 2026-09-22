@@ -5,7 +5,6 @@ import { spacing } from '@/shared/theme';
 
 import {
   AttendanceCard,
-  HomeBottomNav,
   HomeHeader,
   MonthlyOverviewCard,
   NotificationCard,
@@ -25,7 +24,6 @@ export function HomeScreen() {
         <MonthlyOverviewCard />
         <NotificationCard />
       </ScrollView>
-      <HomeBottomNav />
     </ScreenContainer>
   );
 }

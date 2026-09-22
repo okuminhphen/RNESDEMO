@@ -1,6 +1,6 @@
 import { colors } from '@/shared/theme';
 
-import type { BottomNavItem, OverviewStat, QuickAction } from '../types/home.types';
+import type { OverviewStat, QuickAction } from '../types/home.types';
 
 export const homeProfile = {
   greeting: 'Xin chào,',
@@ -24,6 +24,7 @@ export const quickActions: QuickAction[] = [
     icon: 'calendar',
     color: colors.primary,
     backgroundColor: colors.primarySoft,
+    href: '/attendance',
   },
   {
     id: 'salary-summary',
@@ -31,6 +32,7 @@ export const quickActions: QuickAction[] = [
     icon: 'wallet',
     color: colors.orange,
     backgroundColor: colors.orangeSoft,
+    href: '/payroll',
   },
   {
     id: 'leave-registration',
@@ -38,6 +40,7 @@ export const quickActions: QuickAction[] = [
     icon: 'plane',
     color: colors.primary,
     backgroundColor: colors.primarySoft,
+    href: '/requests',
   },
   {
     id: 'my-forms',
@@ -45,6 +48,7 @@ export const quickActions: QuickAction[] = [
     icon: 'document',
     color: colors.primary,
     backgroundColor: colors.primarySoft,
+    href: '/requests',
   },
   {
     id: 'approval',
@@ -52,6 +56,7 @@ export const quickActions: QuickAction[] = [
     icon: 'approval',
     color: colors.success,
     backgroundColor: colors.successSoft,
+    href: '/requests',
   },
   {
     id: 'employee-information',
@@ -59,6 +64,7 @@ export const quickActions: QuickAction[] = [
     icon: 'employee',
     color: colors.primary,
     backgroundColor: colors.primarySoft,
+    href: '/more',
   },
 ];
 
@@ -87,12 +93,4 @@ export const overviewStats: OverviewStat[] = [
     color: colors.orange,
     backgroundColor: colors.orangeSoft,
   },
-];
-
-export const bottomNavigation: BottomNavItem[] = [
-  { id: 'home', label: 'Trang chủ', icon: 'home', active: true },
-  { id: 'attendance', label: 'Công', icon: 'time' },
-  { id: 'forms', label: 'Đơn từ', icon: 'forms' },
-  { id: 'salary', label: 'Lương', icon: 'salary' },
-  { id: 'more', label: 'Khác', icon: 'more' },
 ];
