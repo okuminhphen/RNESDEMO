@@ -95,10 +95,10 @@ export function CheckoutConfirmSheet({
                 </View>
               </View>
 
-              {/* Tag trạng thái vị trí xem trước an toàn */}
+              {/* Tag GPS mock, theo trạng thái hiển thị của ảnh mẫu */}
               <View style={styles.gpsRow}>
                 <CheckCircle2 color="#059669" size={15} strokeWidth={2.2} />
-                <Text style={styles.gpsNotice}>Vị trí mẫu – Bản xem trước</Text>
+                <Text style={styles.gpsNotice}>GPS hợp lệ</Text>
                 <Info color="#6B7280" size={13} />
               </View>
             </LinearGradient>
@@ -135,17 +135,17 @@ export function CheckoutConfirmSheet({
               />
             </View>
 
-            {/* Khung thông báo preview an toàn */}
+            {/* Khung trạng thái vị trí mock, theo bố cục ảnh mẫu */}
             <View style={styles.notice}>
               <View style={styles.noticeIcon}>
                 <MapPin color="#059669" size={20} />
               </View>
               <View style={styles.noticeCopy}>
                 <Text style={styles.noticeTitle}>
-                  Khu vực chấm công mẫu
+                  Bạn đang ở trong khu vực chấm công mẫu hợp lệ
                 </Text>
                 <Text style={styles.noticeText}>
-                  Ứng dụng đang ở chế độ xem trước, chưa kích hoạt GPS và máy chủ chấm công. Thao tác xác nhận an toàn và không ghi nhận công thực tế.
+                  Vị trí của bạn nằm trong phạm vi cho phép chấm công tại Văn phòng Hà Nội.
                 </Text>
               </View>
             </View>
@@ -401,8 +401,8 @@ const styles = StyleSheet.create({
   },
   notice: {
     alignItems: 'center',
-    backgroundColor: '#ECFDF5',
-    borderColor: '#A7F3D0',
+    backgroundColor: colors.surface,
+    borderColor: '#F1F5F9',
     borderRadius: radius.md,
     borderWidth: 1,
     flexDirection: 'row',

@@ -66,6 +66,22 @@ export const calendarDaysSep2025: AttendanceCalendarDay[] = Array.from(
 
 /* -- Chi tiết từng ngày khi bấm vào lịch -- */
 export const dayDetailsSep2025: Record<number, DayDetail> = {
+  1: {
+    date: '01/09/2025',
+    status: 'on-time',
+    statusLabel: 'Đúng giờ',
+    checkIn: {
+      time: '07:58',
+      location: 'Văn phòng Hà Nội',
+      address: 'Tòa nhà VFI, Duy Tân, Cầu Giấy, Hà Nội',
+    },
+    checkOut: {
+      time: '17:32',
+      location: 'Văn phòng Hà Nội',
+      address: 'Tòa nhà VFI, Duy Tân, Cầu Giấy, Hà Nội',
+    },
+    shift: '08:00 - 17:30',
+  },
   17: {
     date: '17/09/2025',
     status: 'on-time',
@@ -409,11 +425,11 @@ export const attendanceRecords: AttendanceRecord[] = [
   {
     id: 'rec-2025-09-01',
     date: 'Thứ Hai, 01/09/2025',
-    checkIn: '--:--',
-    checkOut: '--:--',
-    duration: '--',
-    status: 'Nghỉ lễ Quốc Khánh',
-    tone: 'neutral',
+    checkIn: '07:58',
+    checkOut: '17:32',
+    duration: '8h 34m',
+    status: 'Đúng giờ',
+    tone: 'success',
   },
 ];
 
