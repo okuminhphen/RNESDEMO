@@ -1,21 +1,37 @@
-import { ChevronRight } from 'lucide-react-native';
-import { StyleSheet, Text, View } from 'react-native';
+﻿import { ChevronRight } from 'lucide-react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors, spacing, typography } from '@/shared/theme';
 
 type SectionHeaderProps = {
   title: string;
   actionLabel: string;
+  onAction?: () => void;
 };
 
-export function SectionHeader({ title, actionLabel }: SectionHeaderProps) {
+export function SectionHeader({ title, actionLabel, onAction }: SectionHeaderProps) {
+  const actionContent = (
+    <>
+      <Text style={styles.actionText}>{actionLabel}</Text>
+      <ChevronRight color={colors.primary} size={17} strokeWidth={2.5} />
+    </>
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
-      <View style={styles.action}>
-        <Text style={styles.actionText}>{actionLabel}</Text>
-        <ChevronRight color={colors.primary} size={17} strokeWidth={2.5} />
-      </View>
+      {onAction ? (
+        <Pressable
+          accessibilityLabel={actionLabel}
+          accessibilityRole="button"
+          onPress={onAction}
+          style={styles.action}
+        >
+          {actionContent}
+        </Pressable>
+      ) : (
+        <View style={styles.action}>{actionContent}</View>
+      )}
     </View>
   );
 }

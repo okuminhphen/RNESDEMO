@@ -1,11 +1,14 @@
+﻿import { useRouter } from 'expo-router';
 import { Bell, ScanLine, UserRound } from 'lucide-react-native';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { cardShadow, colors, radius, spacing, typography } from '@/shared/theme';
 
 import { homeProfile } from '../data/home.mock';
 
 export function HomeHeader() {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
@@ -21,10 +24,15 @@ export function HomeHeader() {
       </View>
 
       <View style={styles.actions}>
-        <View accessibilityLabel="Có thông báo mới" style={styles.notification}>
+        <Pressable
+          accessibilityLabel="Xem thông báo"
+          accessibilityRole="button"
+          onPress={() => router.push('/requests/notifications')}
+          style={styles.notification}
+        >
           <Bell color={colors.navy} size={22} strokeWidth={2} />
           <View style={styles.notificationDot} />
-        </View>
+        </Pressable>
 
         <View accessibilityLabel="Quét mã" style={styles.scan}>
           <ScanLine color={colors.navy} size={22} strokeWidth={2} />
