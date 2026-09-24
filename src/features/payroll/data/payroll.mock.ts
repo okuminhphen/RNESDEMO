@@ -1,12 +1,46 @@
-export const salaryBreakdown = [
-  { id: 'base', label: 'Lương cơ bản', value: '18.000.000 ₫', tone: 'positive' },
-  { id: 'allowance', label: 'Phụ cấp', value: '2.500.000 ₫', tone: 'positive' },
-  { id: 'overtime', label: 'Làm thêm giờ', value: '1.280.000 ₫', tone: 'positive' },
-  { id: 'insurance', label: 'Bảo hiểm & thuế', value: '-2.346.000 ₫', tone: 'negative' },
-] as const;
+export type Payslip = {
+  id: string;
+  month: number;
+  year: number;
+  issuedAt: string;
+  baseSalary: number;
+  allowance: number;
+  overtimePay: number;
+  bonus: number;
+  deduction: number;
+  workDays: number;
+  totalWorkDays: number;
+  overtimeHours: number;
+};
 
-export const payslips = [
-  { id: '2025-09', month: 'Tháng 9/2025', issuedAt: '30/09/2025', net: '19.434.000 ₫' },
-  { id: '2025-08', month: 'Tháng 8/2025', issuedAt: '31/08/2025', net: '18.920.000 ₫' },
-  { id: '2025-07', month: 'Tháng 7/2025', issuedAt: '31/07/2025', net: '19.105.000 ₫' },
-] as const;
+// Mock data until the payroll API is available. Net amounts are derived from
+// the displayed line items so the card and history remain consistent.
+export const payslips: Payslip[] = [
+  {
+    id: '2025-09', month: 9, year: 2025, issuedAt: '25/09/2025',
+    baseSalary: 12000000, allowance: 2000000, overtimePay: 800000,
+    bonus: 1000000, deduction: 520000, workDays: 18, totalWorkDays: 22,
+    overtimeHours: 12,
+  },
+  {
+    id: '2025-08', month: 8, year: 2025, issuedAt: '25/08/2025',
+    baseSalary: 11500000, allowance: 2000000, overtimePay: 750000,
+    bonus: 1000000, deduction: 500000, workDays: 20, totalWorkDays: 22,
+    overtimeHours: 10,
+  },
+  {
+    id: '2025-07', month: 7, year: 2025, issuedAt: '25/07/2025',
+    baseSalary: 11000000, allowance: 2000000, overtimePay: 500000,
+    bonus: 1000000, deduction: 520000, workDays: 19, totalWorkDays: 23,
+    overtimeHours: 8,
+  },
+];
+
+export function getNetSalary(payslip: Payslip) {
+  return payslip.baseSalary + payslip.allowance + payslip.overtimePay
+    + payslip.bonus - payslip.deduction;
+}
+
+export function formatVnd(amount: number) {
+  return `${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')} đ`;
+}
