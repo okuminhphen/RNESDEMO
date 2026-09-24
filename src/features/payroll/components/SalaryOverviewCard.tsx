@@ -37,7 +37,7 @@ export function SalaryOverviewCard() {
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: radius.xl,
+    borderRadius: radius.md,
     padding: spacing.xl,
   },
   header: {

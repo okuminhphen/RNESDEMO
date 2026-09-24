@@ -1,4 +1,4 @@
-import { CalendarCheck, LogIn, LogOut } from 'lucide-react-native';
+﻿import { CalendarCheck, Clock, LogIn, LogOut } from 'lucide-react-native';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { AppCard, SectionHeader, StatusBadge } from '@/shared/components';
@@ -8,7 +8,7 @@ import { attendanceRecords } from '../data/attendance.mock';
 
 export function AttendanceRecordList() {
   return (
-    <AppCard style={styles.card}>
+    <AppCard style={styles.card} variant="soft">
       <SectionHeader actionLabel="Xem tất cả" title="Chấm công gần đây" />
       <View style={styles.list}>
         {attendanceRecords.map((record, index) => (
@@ -19,10 +19,16 @@ export function AttendanceRecordList() {
             <View style={styles.copy}>
               <Text style={styles.date}>{record.date}</Text>
               <View style={styles.times}>
-                <LogIn color={colors.success} size={14} />
+                <LogIn color="#10B981" size={13} />
                 <Text style={styles.time}>{record.checkIn}</Text>
-                <LogOut color={colors.orange} size={14} />
+                <LogOut color="#3B82F6" size={13} />
                 <Text style={styles.time}>{record.checkOut}</Text>
+                {record.duration && (
+                  <>
+                    <Clock color="#9CA3AF" size={12} />
+                    <Text style={styles.duration}>{record.duration}</Text>
+                  </>
+                )}
               </View>
             </View>
             <StatusBadge label={record.status} tone={record.tone} />
@@ -44,11 +50,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     gap: spacing.sm,
-    minHeight: 72,
+    minHeight: 70,
     paddingVertical: spacing.sm,
   },
   divider: {
-    borderTopColor: colors.border,
+    borderTopColor: '#F3F4F6',
     borderTopWidth: 1,
   },
   icon: {
@@ -71,12 +77,17 @@ const styles = StyleSheet.create({
   times: {
     alignItems: 'center',
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: spacing.xs,
     marginTop: spacing.xs,
   },
   time: {
     color: colors.textSecondary,
     fontSize: typography.caption,
-    marginRight: spacing.xs,
+    marginRight: 4,
+  },
+  duration: {
+    color: colors.textMuted,
+    fontSize: 11,
   },
 });

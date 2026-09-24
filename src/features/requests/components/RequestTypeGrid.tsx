@@ -23,7 +23,7 @@ export function RequestTypeGrid() {
           const Icon = icon.component;
 
           return (
-            <AppCard accessibilityRole="button" key={requestType.id} style={styles.card}>
+            <AppCard accessibilityRole="button" key={requestType.id} style={styles.card} variant="soft">
               <IconBadge backgroundColor={icon.background} size={44}>
                 <Icon color={icon.color} size={24} strokeWidth={2.1} />
               </IconBadge>

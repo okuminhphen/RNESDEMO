@@ -8,7 +8,7 @@ import { salaryBreakdown } from '../data/payroll.mock';
 
 export function SalaryBreakdownCard() {
   return (
-    <AppCard style={styles.card}>
+    <AppCard style={styles.card} variant="soft">
       <Text style={styles.heading}>Chi tiết thu nhập</Text>
       <View style={styles.list}>
         {salaryBreakdown.map((item, index) => {

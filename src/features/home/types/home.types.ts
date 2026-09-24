@@ -1,10 +1,10 @@
 export type QuickActionIcon =
   | 'calendar'
   | 'wallet'
-  | 'plane'
+  | 'create-request'
   | 'document'
   | 'approval'
-  | 'employee';
+  | 'schedule';
 
 export type QuickAction = {
   id: string;
@@ -12,10 +12,12 @@ export type QuickAction = {
   icon: QuickActionIcon;
   color: string;
   backgroundColor: string;
+  description: string;
+  badge?: string;
   href: '/attendance' | '/requests' | '/payroll' | '/more';
 };
 
-export type OverviewIcon = 'work' | 'leave' | 'remaining';
+export type OverviewIcon = 'work' | 'leave' | 'late' | 'missing-work';
 
 export type OverviewStat = {
   id: string;

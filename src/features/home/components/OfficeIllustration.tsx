@@ -1,107 +1,27 @@
-import { StyleSheet, View } from 'react-native';
-
-import { colors, radius } from '@/shared/theme';
-
-const windows = Array.from({ length: 12 }, (_, index) => index);
+import Svg, { Circle, Path, Rect } from 'react-native-svg';
 
 export function OfficeIllustration() {
   return (
-    <View pointerEvents="none" style={styles.scene}>
-      <View style={[styles.cloud, styles.cloudLeft]} />
-      <View style={[styles.cloud, styles.cloudRight]} />
-      <View style={[styles.bush, styles.bushLeft]} />
-      <View style={[styles.bush, styles.bushCenter]} />
-      <View style={[styles.bush, styles.bushRight]} />
-      <View style={styles.buildingBack} />
-      <View style={styles.building}>
-        <View style={styles.windows}>
-          {windows.map((window) => (
-            <View key={window} style={styles.window} />
-          ))}
-        </View>
-      </View>
-      <View style={styles.ground} />
-    </View>
+    <Svg height="100%" pointerEvents="none" viewBox="0 0 220 148" width="100%">
+      <Circle cx="117" cy="24" fill="#FFD7A2" opacity={0.8} r="11" />
+
+      <Path d="M7 83c7-12 17-12 24-3 5-7 14-5 18 3" fill="#FFFFFF" opacity={0.6} />
+      <Path d="M76 39c6-12 18-12 24-2 4-5 12-5 16 2" fill="#FFFFFF" opacity={0.55} />
+
+      <Path d="M147 61 166 49l19 8v91h-38Z" fill="#D0E5FF" opacity={0.74} />
+      <Path d="M179 31 199 19l18 9v120h-38Z" fill="#BAD8FC" opacity={0.72} />
+      <Path d="m179 31 20-12 18 9-19 12Z" fill="#E4F1FF" opacity={0.75} />
+      <Path d="M198 40 217 28v120h-19Z" fill="#A9CEF8" opacity={0.5} />
+      <Path d="M188 49v88m9-92v92m10-98v98" stroke="#EAF5FF" strokeWidth="3" opacity={0.55} />
+
+      <Path d="M24 85 94 49l69 32v67H24Z" fill="#BDDDFE" opacity={0.78} />
+      <Path d="m24 85 70-36 69 32-69-25Z" fill="#E8F4FF" opacity={0.9} />
+      <Path d="M39 90 94 63l53 24v61H39Z" fill="#A9D0FB" opacity={0.6} />
+      <Path d="M39 102 94 76l53 23" fill="none" stroke="#EAF5FF" strokeWidth="4" opacity={0.68} />
+      <Path d="M39 117 94 91l53 23" fill="none" stroke="#EAF5FF" strokeWidth="4" opacity={0.6} />
+      <Path d="M64 80v68m18-76v76m18-75v75m18-67v67m18-59v59" stroke="#E8F3FF" strokeWidth="3" opacity={0.6} />
+      <Rect fill="#EAF5FF" height="56" opacity={0.64} rx="3" width="13" x="11" y="92" />
+      <Rect fill="#D7EAFE" height="68" opacity={0.7} rx="3" width="12" x="151" y="80" />
+    </Svg>
   );
 }
-
-const styles = StyleSheet.create({
-  scene: {
-    height: 126,
-    width: 142,
-  },
-  cloud: {
-    backgroundColor: 'rgba(255,255,255,0.72)',
-    borderRadius: radius.pill,
-    height: 12,
-    position: 'absolute',
-    width: 34,
-  },
-  cloudLeft: {
-    left: 4,
-    top: 24,
-  },
-  cloudRight: {
-    right: 0,
-    top: 42,
-  },
-  bush: {
-    backgroundColor: '#58D29A',
-    borderRadius: radius.pill,
-    bottom: 11,
-    height: 28,
-    position: 'absolute',
-    width: 34,
-  },
-  bushLeft: {
-    left: 8,
-  },
-  bushCenter: {
-    bottom: 7,
-    left: 23,
-  },
-  bushRight: {
-    right: 1,
-  },
-  buildingBack: {
-    backgroundColor: '#B9D9FE',
-    bottom: 12,
-    height: 63,
-    position: 'absolute',
-    right: 13,
-    transform: [{ rotate: '3deg' }],
-    width: 43,
-  },
-  building: {
-    backgroundColor: '#7AB8FA',
-    bottom: 11,
-    height: 89,
-    left: 42,
-    position: 'absolute',
-    transform: [{ skewY: '-5deg' }],
-    width: 56,
-  },
-  windows: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 5,
-    paddingHorizontal: 9,
-    paddingTop: 12,
-  },
-  window: {
-    backgroundColor: '#DCEEFF',
-    borderRadius: 2,
-    height: 9,
-    width: 7,
-  },
-  ground: {
-    backgroundColor: colors.success,
-    borderRadius: radius.pill,
-    bottom: 6,
-    height: 10,
-    left: 3,
-    opacity: 0.45,
-    position: 'absolute',
-    width: 135,
-  },
-});

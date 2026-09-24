@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Clock3, FileText, House, Menu, WalletCards } from 'lucide-react-native';
+import { Clock3, FileText, House, UserRound, WalletCards } from 'lucide-react-native';
 import { StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -46,7 +46,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="requests"
         options={{
-          title: 'Đơn từ',
+          title: 'Yêu cầu',
+          tabBarBadge: 3,
+          tabBarBadgeStyle: { backgroundColor: colors.red, fontSize: 10 },
           tabBarIcon: ({ color }) => <FileText color={color} size={23} strokeWidth={2} />,
         }}
       />
@@ -60,8 +62,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="more"
         options={{
-          title: 'Khác',
-          tabBarIcon: ({ color }) => <Menu color={color} size={25} strokeWidth={2} />,
+          title: 'Cá nhân',
+          tabBarIcon: ({ color }) => <UserRound color={color} size={25} strokeWidth={2} />,
         }}
       />
     </Tabs>

@@ -13,6 +13,10 @@ export const colors = {
   successSoft: '#E5F9F0',
   orange: '#FF9A2E',
   orangeSoft: '#FFF3E3',
+  violet: '#8B6DF6',
+  violetSoft: '#F0ECFF',
+  pink: '#FF5A7E',
+  pinkSoft: '#FFEAF0',
   red: '#FF4D5E',
   navy: '#183054',
 } as const;

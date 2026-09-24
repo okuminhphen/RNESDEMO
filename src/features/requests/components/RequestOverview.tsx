@@ -20,7 +20,7 @@ export function RequestOverview() {
         const Icon = icon.component;
 
         return (
-          <AppCard key={stat.id} style={styles.card}>
+          <AppCard key={stat.id} style={styles.card} variant="soft">
             <IconBadge backgroundColor={icon.background} size={38}>
               <Icon color={icon.color} size={21} strokeWidth={2.2} />
             </IconBadge>

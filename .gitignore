@@ -5,6 +5,7 @@ node_modules/
 
 # Expo
 .expo/
+.expo-shared/
 dist/
 web-build/
 expo-env.d.ts
@@ -16,6 +17,7 @@ expo-env.d.ts
 *.p8
 *.p12
 *.key
+*.keystore
 *.mobileprovision
 
 # Metro
@@ -30,11 +32,34 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
+# local environment and secret files
+.env
+.env.*
 .env*.local
+!.env.example
+!.env.*.example
 
 # typescript
 *.tsbuildinfo
+
+# test output
+coverage/
+.nyc_output/
+
+# IDE and OS-local files
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.history/
+Thumbs.db
+Desktop.ini
+
+# Private local workspace (never commit)
+.phunglm/
+/plans/
+/specs/
+/.agents/skills/phunglm-*/
+/.agents/rules/phunglm-*.md
 
 # generated native folders
 /ios

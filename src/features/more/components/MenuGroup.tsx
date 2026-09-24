@@ -32,7 +32,7 @@ export function MenuGroup({ group }: MenuGroupProps) {
   return (
     <View>
       <Text style={styles.heading}>{group.title}</Text>
-      <AppCard style={styles.card}>
+      <AppCard style={styles.card} variant="soft">
         {group.items.map((item, index) => {
           const Icon = icons[item.icon];
           const value = 'value' in item ? item.value : undefined;

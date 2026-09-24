@@ -19,7 +19,7 @@ export function MoreScreen() {
             </IconBadge>
           }
           subtitle="Tài khoản, cài đặt và hỗ trợ"
-          title="Khác"
+          title="Cá nhân"
         />
         <ProfileCard />
         {menuGroups.map((group) => (
@@ -37,10 +37,10 @@ export function MoreScreen() {
 
 const styles = StyleSheet.create({
   content: {
-    gap: spacing.lg,
-    paddingBottom: spacing.xxl,
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing.md,
+    gap: spacing.sm,
+    paddingBottom: spacing.md,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.sm,
   },
   logoutButton: {
     alignItems: 'center',

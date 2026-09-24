@@ -8,7 +8,7 @@ import { profile } from '../data/more.mock';
 
 export function ProfileCard() {
   return (
-    <AppCard style={styles.card}>
+    <AppCard style={styles.card} variant="soft">
       <View style={styles.topRow}>
         <View style={styles.avatar}>
           <UserRound color={colors.primaryDark} size={38} strokeWidth={1.8} />

@@ -4,20 +4,20 @@ import { useEffect, useState } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { AttendanceCard } from '@/features/home/components/AttendanceCard';
-import { AppCard, MonthSelector, ScreenContainer } from '@/shared/components';
+import { AppCard, ScreenContainer } from '@/shared/components';
 import { colors, radius, spacing, typography } from '@/shared/theme';
 
-import { AttendanceCalendar } from '../components/AttendanceCalendar';
 import { AttendanceRecordList } from '../components/AttendanceRecordList';
-import { AttendanceSummary } from '../components/AttendanceSummary';
 import { CheckoutConfirmSheet } from '../components/CheckoutConfirmSheet';
+import { TimesheetHistoryList } from '../components/TimesheetHistoryList';
+import { attendanceRecords } from '../data/attendance.mock';
 
-type AttendanceTab = 'today' | 'history';
+type CheckInTab = 'today' | 'history';
 
-export function AttendanceScreen() {
+export function CheckInScreen() {
   const router = useRouter();
   const { confirm } = useLocalSearchParams<{ confirm?: string }>();
-  const [activeTab, setActiveTab] = useState<AttendanceTab>('today');
+  const [activeTab, setActiveTab] = useState<CheckInTab>('today');
   const [sheetVisible, setSheetVisible] = useState(false);
 
   useEffect(() => {
@@ -42,7 +42,11 @@ export function AttendanceScreen() {
 
   return (
     <ScreenContainer>
-      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Header */}
         <View style={styles.header}>
           <Pressable
             accessibilityLabel="Quay lại"
@@ -52,9 +56,11 @@ export function AttendanceScreen() {
           >
             <ArrowLeft color={colors.text} size={22} strokeWidth={2} />
           </Pressable>
+
           <Text style={styles.title}>Chấm công</Text>
+
           <Pressable
-            accessibilityLabel="Xem lịch sử"
+            accessibilityLabel="Xem lịch sử chấm công"
             accessibilityRole="button"
             onPress={() => setActiveTab('history')}
             style={styles.headerButton}
@@ -63,24 +69,41 @@ export function AttendanceScreen() {
           </Pressable>
         </View>
 
+        {/* Segmented tabs */}
         <View accessibilityRole="tablist" style={styles.segmented}>
           <Pressable
+            accessibilityLabel="Hôm nay"
             accessibilityRole="tab"
             accessibilityState={{ selected: activeTab === 'today' }}
             onPress={() => setActiveTab('today')}
             style={[styles.segment, activeTab === 'today' && styles.activeSegment]}
           >
-            <Text style={[styles.segmentText, activeTab === 'today' && styles.activeSegmentText]}>
+            <Text
+              style={[
+                styles.segmentText,
+                activeTab === 'today' && styles.activeSegmentText,
+              ]}
+            >
               Hôm nay
             </Text>
           </Pressable>
+
           <Pressable
+            accessibilityLabel="Lịch sử"
             accessibilityRole="tab"
             accessibilityState={{ selected: activeTab === 'history' }}
             onPress={() => setActiveTab('history')}
-            style={[styles.segment, activeTab === 'history' && styles.activeSegment]}
+            style={[
+              styles.segment,
+              activeTab === 'history' && styles.activeSegment,
+            ]}
           >
-            <Text style={[styles.segmentText, activeTab === 'history' && styles.activeSegmentText]}>
+            <Text
+              style={[
+                styles.segmentText,
+                activeTab === 'history' && styles.activeSegmentText,
+              ]}
+            >
               Lịch sử
             </Text>
           </Pressable>
@@ -89,6 +112,7 @@ export function AttendanceScreen() {
         {activeTab === 'today' ? (
           <>
             <AttendanceCard onCheckout={() => setSheetVisible(true)} />
+
             <AppCard style={styles.shiftCard} variant="soft">
               <View style={styles.shiftIcon}>
                 <Clock3 color={colors.primary} size={22} strokeWidth={2} />
@@ -101,17 +125,15 @@ export function AttendanceScreen() {
               </View>
               <Text style={styles.shiftTime}>08:00 - 17:30</Text>
             </AppCard>
+
+            <AttendanceRecordList />
+
             <Text style={styles.demoNote}>
               Chế độ xem trước giao diện. Thao tác chấm công không ghi nhận dữ liệu thực.
             </Text>
           </>
         ) : (
-          <>
-            <MonthSelector label="Tháng 9, 2025" />
-            <AttendanceSummary />
-            <AttendanceCalendar />
-            <AttendanceRecordList />
-          </>
+          <TimesheetHistoryList records={attendanceRecords} />
         )}
       </ScrollView>
 
@@ -126,53 +148,58 @@ export function AttendanceScreen() {
 
 const styles = StyleSheet.create({
   content: {
-    gap: spacing.sm,
-    paddingBottom: spacing.md,
+    gap: spacing.md,
+    paddingBottom: spacing.xxl,
     paddingHorizontal: spacing.md,
-    paddingTop: spacing.sm,
+    paddingTop: spacing.xs,
   },
   header: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    minHeight: 44,
+    paddingVertical: spacing.xs,
   },
   headerButton: {
     alignItems: 'center',
     backgroundColor: colors.surface,
-    borderRadius: radius.sm,
+    borderRadius: radius.pill,
     height: 40,
     justifyContent: 'center',
     width: 40,
   },
   title: {
     color: colors.text,
-    fontSize: 22,
+    fontSize: typography.title,
     fontWeight: '800',
   },
   segmented: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.md,
+    backgroundColor: '#F3F4F6',
+    borderRadius: radius.pill,
     flexDirection: 'row',
     padding: 3,
   },
   segment: {
     alignItems: 'center',
-    borderRadius: radius.sm,
+    borderRadius: radius.pill,
     flex: 1,
-    justifyContent: 'center',
-    minHeight: 40,
+    paddingVertical: 10,
   },
   activeSegment: {
-    backgroundColor: colors.primaryDark,
+    backgroundColor: colors.primary,
+    elevation: 2,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
   },
   segmentText: {
     color: colors.textSecondary,
     fontSize: typography.bodySmall,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   activeSegmentText: {
     color: colors.surface,
+    fontWeight: '800',
   },
   shiftCard: {
     alignItems: 'center',
@@ -199,7 +226,7 @@ const styles = StyleSheet.create({
   },
   shiftSubtitle: {
     color: colors.textSecondary,
-    fontSize: 10,
+    fontSize: 11,
     marginTop: 2,
   },
   shiftTime: {
@@ -210,6 +237,7 @@ const styles = StyleSheet.create({
   demoNote: {
     color: colors.textMuted,
     fontSize: typography.caption,
+    lineHeight: 16,
     textAlign: 'center',
   },
 });

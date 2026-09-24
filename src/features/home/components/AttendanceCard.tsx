@@ -1,27 +1,24 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import { CalendarDays, LogOut, MapPin } from 'lucide-react-native';
-import { StyleSheet, Text, View } from 'react-native';
+﻿import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
+import { ChevronRight, CirclePlus, MapPin } from 'lucide-react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors, radius, spacing, typography } from '@/shared/theme';
 
 import { attendanceSummary } from '../data/home.mock';
 import { OfficeIllustration } from './OfficeIllustration';
 
-export function AttendanceCard() {
+export function AttendanceCard({ onCheckout }: { onCheckout?: () => void }) {
+  const router = useRouter();
+
   return (
     <LinearGradient
-      colors={['#E9F4FF', '#D8EBFF']}
+      colors={['#E7F2FF', '#F3F8FF']}
       end={{ x: 1, y: 1 }}
       start={{ x: 0, y: 0 }}
       style={styles.card}
     >
-      <View style={styles.dateRow}>
-        <Text style={styles.date}>{attendanceSummary.date}</Text>
-        <View style={styles.todayBadge}>
-          <CalendarDays color={colors.primary} size={18} strokeWidth={2.4} />
-          <Text style={styles.todayText}>Hôm nay</Text>
-        </View>
-      </View>
+      <Text style={styles.date}>{attendanceSummary.date}</Text>
 
       <View style={styles.summary}>
         <View style={styles.summaryCopy}>
@@ -33,26 +30,45 @@ export function AttendanceCard() {
           <Text style={styles.checkInTime}>{attendanceSummary.checkInTime}</Text>
 
           <View style={styles.locationRow}>
-            <MapPin color={colors.navy} size={22} strokeWidth={2} />
+            <MapPin color={colors.navy} size={18} strokeWidth={2} />
             <View style={styles.locationCopy}>
               <Text style={styles.location}>{attendanceSummary.location}</Text>
-              <Text style={styles.coordinates}>{attendanceSummary.coordinates}</Text>
+              <Text style={styles.address}>{attendanceSummary.address}</Text>
             </View>
           </View>
         </View>
 
         <View style={styles.illustration}>
           <OfficeIllustration />
-          <View style={styles.messageBubble}>
-            <Text style={styles.message}>Làm việc tốt</Text>
-            <Text style={styles.message}>Tạo giá trị lớn!</Text>
+        </View>
+        <View style={styles.sideActions}>
+          <Pressable
+            accessibilityRole="button"
+            onPress={
+              onCheckout ??
+              (() =>
+                router.push({
+                  pathname: '/checkin',
+                  params: { confirm: 'checkout' },
+                }))
+            }
+            style={({ pressed }) => [
+              styles.checkoutButton,
+              pressed && styles.pressed,
+            ]}
+          >
+            <CirclePlus color={colors.surface} size={17} strokeWidth={2.2} />
+            <Text style={styles.checkoutText}>Chấm công ra</Text>
+          </Pressable>
+          <View style={styles.scheduleLink}>
+            <Text style={styles.scheduleText}>Xem lịch làm việc</Text>
+            <ChevronRight
+              color={colors.primaryDark}
+              size={14}
+              strokeWidth={2.5}
+            />
           </View>
         </View>
-      </View>
-
-      <View accessibilityRole="button" style={styles.checkoutButton}>
-        <LogOut color={colors.surface} size={22} strokeWidth={2.2} />
-        <Text style={styles.checkoutText}>Chấm công ra</Text>
       </View>
     </LinearGradient>
   );
@@ -60,129 +76,116 @@ export function AttendanceCard() {
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: radius.xl,
+    borderRadius: radius.md,
     overflow: 'hidden',
-    padding: spacing.lg,
-  },
-  dateRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: spacing.sm,
-    justifyContent: 'space-between',
+    padding: 14,
   },
   date: {
-    color: colors.textSecondary,
-    flex: 1,
-    fontSize: typography.body,
-    fontWeight: '500',
-  },
-  todayBadge: {
-    alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.72)',
-    borderRadius: radius.pill,
-    flexDirection: 'row',
-    gap: spacing.sm,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-  },
-  todayText: {
-    color: colors.primary,
+    color: colors.text,
     fontSize: typography.bodySmall,
-    fontWeight: '700',
+    fontWeight: '500',
   },
   summary: {
     flexDirection: 'row',
-    minHeight: 188,
+    minHeight: 116,
     paddingTop: spacing.sm,
   },
   summaryCopy: {
     flex: 1,
+    minWidth: 0,
     zIndex: 2,
   },
   time: {
     color: colors.text,
-    fontSize: typography.display,
+    fontSize: 32,
     fontVariant: ['tabular-nums'],
     fontWeight: '800',
     letterSpacing: -1,
-    lineHeight: 49,
+    lineHeight: 39,
   },
   statusRow: {
     alignItems: 'center',
     flexDirection: 'row',
-    gap: spacing.md,
+    gap: spacing.sm,
     marginTop: spacing.xs,
   },
   statusDot: {
     backgroundColor: colors.success,
     borderRadius: radius.pill,
-    height: 18,
-    width: 18,
+    height: 8,
+    width: 8,
   },
   statusText: {
     color: '#15945A',
-    fontSize: typography.body,
-    fontWeight: '800',
+    fontSize: typography.caption,
+    fontWeight: '600',
   },
   checkInTime: {
     color: colors.text,
-    fontSize: typography.body,
-    marginLeft: 30,
+    fontSize: typography.caption,
+    marginLeft: 16,
     marginTop: 2,
   },
   locationRow: {
     alignItems: 'flex-start',
     flexDirection: 'row',
     gap: spacing.sm,
-    marginTop: spacing.lg,
+    marginTop: spacing.sm,
   },
   locationCopy: {
     flex: 1,
   },
   location: {
     color: colors.text,
-    fontSize: typography.bodySmall,
+    fontSize: typography.caption,
     fontWeight: '600',
   },
-  coordinates: {
+  address: {
     color: colors.textSecondary,
-    fontSize: 11,
+    fontSize: 10,
+    lineHeight: 13,
     marginTop: 2,
   },
   illustration: {
-    bottom: -1,
+    height: 116,
+    opacity: 0.85,
     position: 'absolute',
-    right: -14,
-    width: 142,
+    right: -8,
+    top: -24,
+    width: 180,
   },
-  messageBubble: {
-    backgroundColor: 'rgba(255,255,255,0.68)',
-    borderRadius: radius.md,
-    bottom: 4,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    position: 'absolute',
-    right: 0,
-    width: 132,
+  sideActions: {
+    paddingTop: 43,
+    width: 144,
+    zIndex: 2,
   },
-  message: {
+  scheduleLink: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  scheduleText: {
     color: colors.primaryDark,
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '600',
-    lineHeight: 18,
   },
   checkoutButton: {
     alignItems: 'center',
-    backgroundColor: colors.primary,
-    borderRadius: radius.pill,
+    backgroundColor: colors.primaryDark,
+    borderRadius: radius.sm,
     flexDirection: 'row',
-    gap: spacing.md,
+    gap: spacing.xs,
     justifyContent: 'center',
-    minHeight: 52,
+    minHeight: 39,
+    paddingHorizontal: spacing.xs,
   },
   checkoutText: {
     color: colors.surface,
-    fontSize: typography.subtitle,
+    fontSize: typography.caption,
     fontWeight: '700',
+  },
+  pressed: {
+    opacity: 0.8,
   },
 });

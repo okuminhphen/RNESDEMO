@@ -1,16 +1,15 @@
 import {
   CalendarDays,
+  ClipboardPlus,
   CircleCheckBig,
   FileText,
-  Plane,
-  UserRound,
   WalletCards,
 } from 'lucide-react-native';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { AppCard, IconBadge } from '@/shared/components';
-import { colors, spacing, typography } from '@/shared/theme';
+import { colors, radius, spacing, typography } from '@/shared/theme';
 
 import { quickActions } from '../data/home.mock';
 import type { QuickActionIcon } from '../types/home.types';
@@ -18,53 +17,84 @@ import type { QuickActionIcon } from '../types/home.types';
 const actionIcons = {
   calendar: CalendarDays,
   wallet: WalletCards,
-  plane: Plane,
+  'create-request': ClipboardPlus,
   document: FileText,
   approval: CircleCheckBig,
-  employee: UserRound,
+  schedule: CalendarDays,
 } satisfies Record<QuickActionIcon, typeof CalendarDays>;
 
 export function QuickActionGrid() {
+  const router = useRouter();
+
   return (
     <View style={styles.grid}>
-      {quickActions.map((action) => {
-        const Icon = actionIcons[action.icon];
+      {[quickActions.slice(0, 3), quickActions.slice(3, 6)].map((row, rowIndex) => (
+        <View key={rowIndex} style={styles.row}>
+          {row.map((action) => {
+            const Icon = actionIcons[action.icon];
 
-        return (
-          <Link asChild href={action.href} key={action.id}>
-            <Pressable style={({ pressed }) => [styles.item, pressed && styles.pressed]}>
-              <AppCard style={styles.card}>
-                <IconBadge backgroundColor={action.backgroundColor} size={44}>
-                  <Icon color={action.color} size={26} strokeWidth={2.2} />
-                </IconBadge>
-                <Text style={styles.label}>{action.title}</Text>
-              </AppCard>
-            </Pressable>
-          </Link>
-        );
-      })}
+            return (
+              <Pressable
+                accessibilityLabel={action.title}
+                accessibilityRole="link"
+                key={action.id}
+                onPress={() => router.push(action.href)}
+                style={({ pressed }) => [styles.item, pressed && styles.pressed]}
+              >
+                <AppCard style={styles.card} variant="soft">
+                  {action.badge ? <View style={styles.badge}><Text style={styles.badgeText}>{action.badge}</Text></View> : null}
+                  <IconBadge backgroundColor={action.backgroundColor} size={34}>
+                    <Icon color={action.color} size={22} strokeWidth={2.2} />
+                  </IconBadge>
+                  <Text numberOfLines={1} style={styles.label}>{action.title}</Text>
+                  <Text numberOfLines={3} style={styles.description}>{action.description}</Text>
+                </AppCard>
+              </Pressable>
+            );
+          })}
+        </View>
+      ))}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   grid: {
+    gap: spacing.sm,
+  },
+  row: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: spacing.md,
+    gap: spacing.sm,
   },
   item: {
-    flexBasis: '30%',
-    flexGrow: 1,
-    flexShrink: 1,
+    flex: 1,
     minWidth: 0,
   },
   card: {
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 112,
+    height: 104,
     paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.md,
+    paddingVertical: 6,
+    width: '100%',
+  },
+  badge: {
+    alignItems: 'center',
+    backgroundColor: colors.red,
+    borderColor: colors.surface,
+    borderRadius: radius.pill,
+    borderWidth: 2,
+    height: 24,
+    justifyContent: 'center',
+    position: 'absolute',
+    right: spacing.xs,
+    top: spacing.xs,
+    width: 24,
+  },
+  badgeText: {
+    color: colors.surface,
+    fontSize: 11,
+    fontWeight: '800',
   },
   pressed: {
     opacity: 0.72,
@@ -72,10 +102,17 @@ const styles = StyleSheet.create({
   },
   label: {
     color: colors.text,
-    fontSize: typography.bodySmall,
+    fontSize: typography.caption,
     fontWeight: '600',
-    lineHeight: 18,
-    marginTop: spacing.sm,
+    lineHeight: 15,
+    marginTop: spacing.xs,
+    textAlign: 'center',
+  },
+  description: {
+    color: colors.textSecondary,
+    fontSize: 10,
+    lineHeight: 13,
+    marginTop: 2,
     textAlign: 'center',
   },
 });

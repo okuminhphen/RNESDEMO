@@ -1,7 +1,7 @@
-import { Bell, UserRound } from 'lucide-react-native';
+import { Bell, ScanLine, UserRound } from 'lucide-react-native';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { colors, radius, spacing, typography } from '@/shared/theme';
+import { cardShadow, colors, radius, spacing, typography } from '@/shared/theme';
 
 import { homeProfile } from '../data/home.mock';
 
@@ -9,7 +9,7 @@ export function HomeHeader() {
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
-        <UserRound color={colors.primaryDark} size={34} strokeWidth={1.8} />
+        <UserRound color={colors.primaryDark} size={28} strokeWidth={1.8} />
       </View>
 
       <View style={styles.copy}>
@@ -20,9 +20,15 @@ export function HomeHeader() {
         </Text>
       </View>
 
-      <View accessibilityLabel="Có thông báo mới" style={styles.notification}>
-        <Bell color={colors.navy} size={25} strokeWidth={2} />
-        <View style={styles.notificationDot} />
+      <View style={styles.actions}>
+        <View accessibilityLabel="Có thông báo mới" style={styles.notification}>
+          <Bell color={colors.navy} size={22} strokeWidth={2} />
+          <View style={styles.notificationDot} />
+        </View>
+
+        <View accessibilityLabel="Quét mã" style={styles.scan}>
+          <ScanLine color={colors.navy} size={22} strokeWidth={2} />
+        </View>
       </View>
     </View>
   );
@@ -32,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flexDirection: 'row',
-    gap: spacing.md,
+    gap: spacing.sm,
   },
   avatar: {
     alignItems: 'center',
@@ -40,37 +46,45 @@ const styles = StyleSheet.create({
     borderColor: colors.surface,
     borderRadius: radius.pill,
     borderWidth: 3,
-    height: 64,
+    height: 48,
     justifyContent: 'center',
-    width: 64,
+    width: 48,
   },
   copy: {
     flex: 1,
     minWidth: 0,
   },
+  actions: {
+    flexDirection: 'row',
+    gap: spacing.xs,
+  },
   greeting: {
     color: colors.textSecondary,
-    fontSize: typography.body,
-    lineHeight: 20,
+    fontSize: typography.caption,
+    lineHeight: 16,
   },
   name: {
     color: colors.text,
-    fontSize: 22,
+    fontSize: typography.subtitle,
     fontWeight: '800',
-    lineHeight: 27,
+    lineHeight: 22,
   },
   subtitle: {
     color: colors.textSecondary,
-    fontSize: typography.bodySmall,
-    lineHeight: 19,
-    marginTop: 2,
+    fontSize: 11,
+    lineHeight: 15,
   },
   notification: {
     alignItems: 'center',
-    height: 42,
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
+    borderRadius: radius.pill,
+    borderWidth: 1,
+    ...cardShadow,
+    height: 38,
     justifyContent: 'center',
     position: 'relative',
-    width: 42,
+    width: 38,
   },
   notificationDot: {
     backgroundColor: colors.red,
@@ -82,5 +96,16 @@ const styles = StyleSheet.create({
     right: 6,
     top: 5,
     width: 11,
+  },
+  scan: {
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    ...cardShadow,
+    height: 38,
+    justifyContent: 'center',
+    width: 38,
   },
 });

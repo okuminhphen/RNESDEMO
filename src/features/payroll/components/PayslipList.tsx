@@ -8,7 +8,7 @@ import { payslips } from '../data/payroll.mock';
 
 export function PayslipList() {
   return (
-    <AppCard style={styles.card}>
+    <AppCard style={styles.card} variant="soft">
       <SectionHeader actionLabel="Xem tất cả" title="Phiếu lương" />
       <View style={styles.list}>
         {payslips.map((payslip, index) => (

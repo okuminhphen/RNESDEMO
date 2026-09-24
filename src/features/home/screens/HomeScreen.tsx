@@ -20,8 +20,8 @@ export function HomeScreen() {
       >
         <HomeHeader />
         <AttendanceCard />
-        <QuickActionGrid />
         <MonthlyOverviewCard />
+        <QuickActionGrid />
         <NotificationCard />
       </ScrollView>
     </ScreenContainer>
@@ -30,9 +30,9 @@ export function HomeScreen() {
 
 const styles = StyleSheet.create({
   content: {
-    gap: spacing.lg,
-    paddingBottom: spacing.xl,
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing.md,
+    gap: spacing.sm,
+    paddingBottom: spacing.md,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.sm,
   },
 });

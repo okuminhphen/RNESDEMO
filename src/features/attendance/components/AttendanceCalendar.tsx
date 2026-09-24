@@ -1,21 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native';
+﻿import { StyleSheet, Text, View } from 'react-native';
 
 import { AppCard } from '@/shared/components';
 import { colors, radius, spacing, typography } from '@/shared/theme';
 
-import { calendarDays, type AttendanceDayStatus } from '../data/attendance.mock';
+import { calendarDays } from '../data/attendance.mock';
+import type { AttendanceDayStatus } from '../types/attendance.types';
 
 const weekDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 
 const dotColors: Partial<Record<AttendanceDayStatus, string>> = {
-  normal: colors.success,
+  attended: colors.success,
   late: colors.orange,
   leave: colors.red,
 };
 
 export function AttendanceCalendar() {
   return (
-    <AppCard style={styles.card}>
+    <AppCard style={styles.card} variant="soft">
       <View style={styles.header}>
         <Text style={styles.title}>Lịch chấm công</Text>
         <View style={styles.legend}>

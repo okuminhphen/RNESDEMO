@@ -8,7 +8,7 @@ import { recentRequests } from '../data/requests.mock';
 
 export function RecentRequestList() {
   return (
-    <AppCard style={styles.card}>
+    <AppCard style={styles.card} variant="soft">
       <SectionHeader actionLabel="Xem tất cả" title="Đơn gần đây" />
       <View style={styles.list}>
         {recentRequests.map((request, index) => (

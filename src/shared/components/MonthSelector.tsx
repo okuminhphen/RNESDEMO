@@ -25,9 +25,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: colors.surface,
-    borderColor: colors.border,
     borderRadius: radius.md,
-    borderWidth: 1,
+    boxShadow: '0px 2px 14px rgba(42, 81, 140, 0.07)',
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: spacing.sm,
