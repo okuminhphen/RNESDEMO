@@ -60,14 +60,19 @@ export function AttendanceCard({ onCheckout }: { onCheckout?: () => void }) {
             <CirclePlus color={colors.surface} size={17} strokeWidth={2.2} />
             <Text style={styles.checkoutText}>Chấm công ra</Text>
           </Pressable>
-          <View style={styles.scheduleLink}>
+          <Pressable
+            accessibilityLabel="Xem lịch làm việc"
+            accessibilityRole="link"
+            onPress={() => router.push('/attendance/schedule')}
+            style={({ pressed }) => [styles.scheduleLink, pressed && styles.pressed]}
+          >
             <Text style={styles.scheduleText}>Xem lịch làm việc</Text>
             <ChevronRight
               color={colors.primaryDark}
               size={14}
               strokeWidth={2.5}
             />
-          </View>
+          </Pressable>
         </View>
       </View>
     </LinearGradient>

@@ -14,7 +14,7 @@ export type QuickAction = {
   backgroundColor: string;
   description: string;
   badge?: string;
-  href: '/attendance' | '/requests' | '/payroll' | '/more';
+  href: '/attendance' | '/attendance/schedule' | '/requests' | '/payroll' | '/more';
 };
 
 export type OverviewIcon = 'work' | 'leave' | 'late' | 'missing-work';

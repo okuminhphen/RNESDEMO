@@ -61,7 +61,7 @@ export const quickActions: QuickAction[] = [
     color: colors.pink,
     backgroundColor: colors.pinkSoft,
     description: "Xem ca làm, lịch nghỉ",
-    href: "/attendance",
+    href: "/attendance/schedule",
   },
   {
     id: "approval",
